@@ -1,0 +1,6 @@
+.env
+authorization/
+*.session
+*.session-journal
+test/
+sess.txt
