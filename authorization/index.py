@@ -37,13 +37,14 @@ class Authorization:
         api_hash = elements[1].text
         return {'api_key': api_key, 'api_hash': api_hash}
 
-
+#fake data
 proxy = {"type": "socks5",
          "ip": "46.232.3.52",
          "port": 8000,
          "login": "ycjxxk",
          "password": "XVDYYQ"}
 
+#fake data
 phones = {"+62 838 40133226"}
 
 for phone in phones:
@@ -53,14 +54,5 @@ for phone in phones:
     apps = auth.getApps()
 
     for type in {"user", "parser"}:
-        with Client(name="../sessions/"+type+"/"apps['api_key'],
-            api_id=apps['api_key'],
-            api_hash=apps['api_hash'],
-            proxy=dict(
-                scheme=proxy['type'],
-                hostname=proxy['ip'],
-                port=proxy['port'],
-                username=proxy['login'],
-                password=proxy['password'])
-                ) as app:
+        with Client(name="../sessions/"+type+"/"apps['api_key'], api_id=apps['api_key'], api_hash=apps['api_hash'], proxy=dict(scheme=proxy['type'], hostname=proxy['ip'],port=proxy['port'], username=proxy['login'], password=proxy['password'])) as app:
             app.send_message("me", "Message sent with **Pyrogram**!")

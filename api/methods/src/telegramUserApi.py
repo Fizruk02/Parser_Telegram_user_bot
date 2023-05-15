@@ -26,6 +26,15 @@ class TelegramUserAPI:
 	            elif(method == "sendReaction"):
 	                reaction = app.send_reaction(int(data['chat_id']), int(data['message_id']), str(data['emoji']))
 	                answer.put(self.status(200, {"reaction": reaction}))
+	            elif(method == "editProfile"):
+	                profile = app.update_profile(first_name=data['first_name'], last_name=data['last_name'], bio=data['bio'])
+	                answer.put(self.status(200, {"updateProfile": profile}))
+	            elif(method == "editUsername"):
+	                username = app.set_username(data['username'])
+	                answer.put(self.status(200, {"updateUsername": username}))
+	            elif(method == "editPhoto"):
+	                photo = app.set_profile_photo(photo=data['photo'])
+	                answer.put(self.status(200, {"updatePhoto": photo}))
         except Exception as error:
             if str(error) == "database is locked":
                 answer.put(self.status(300, {'wait': 'This process is busy, try again in a few seconds'}))
