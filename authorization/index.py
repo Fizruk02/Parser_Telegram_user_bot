@@ -16,6 +16,7 @@ class Authorization:
 
     def setProxy(self, type, ip, port, login, password):
         self.proxies = {'https': type+'://'+login+':'+password+'@'+ip+':'+str(port)}
+        self.session.proxies.update(self.proxies)
 
     def getCreatorHash(self):
         params = {"hash": self.hash}
@@ -60,7 +61,7 @@ phones = {"+6283840133226", "+6283840133230"}
 for phone in phones:
     auth = Authorization(phone)
     #in development
-    #auth.setProxy(proxy['type'], proxy['ip'], proxy['port'], proxy['login'], proxy['password'])
+    auth.setProxy(proxy['type'], proxy['ip'], proxy['port'], proxy['login'], proxy['password'])
     apps = auth.getApps()
     print({phone: apps})
 #

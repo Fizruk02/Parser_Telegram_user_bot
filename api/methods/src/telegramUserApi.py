@@ -12,18 +12,23 @@ class TelegramUserAPI:
 	                chat = app.join_chat(str(data['channel_link']))
 	                answer.put(self.status(200, {"chat": {"id": chat.id, "title": chat.title}}))
 	            elif(method == "replyToMessage"):
+	                app.add_contact(int(data['chat_id']), app.get_users(int(data['chat_id'])).first_name)
 	                message = app.send_message(int(data['chat_id']), str(data['text']), reply_to_message_id=int(data['replay_id']))
 	                answer.put(self.status(200, {"message": {"id": message.id}}))
 	            elif(method == "sendMessage"):
+	                app.add_contact(int(data['chat_id']), app.get_users(int(data['chat_id'])).first_name)
 	                message = app.send_message(int(data['chat_id']), str(data['text']))
 	                answer.put(self.status(200, {"message": {"id": message.id}}))
 	            elif(method == "sendDocument"):
+	                app.add_contact(int(data['chat_id']), app.get_users(int(data['chat_id'])).first_name)
 	                message = app.send_document(int(data['chat_id']), str(data['path_to_file']), caption=str(data['caption']))
 	                answer.put(self.status(200, {"message": {"id": message.id}}))
 	            elif(method == "sendPhoto"):
+	                app.add_contact(int(data['chat_id']), app.get_users(int(data['chat_id'])).first_name)
 	                message = app.send_document(int(data['chat_id']), str(data['path_to_file']), caption=str(data['caption']))
 	                answer.put(self.status(200, {"message": {"id": message.id}}))
 	            elif(method == "sendReaction"):
+	                app.add_contact(int(data['chat_id']), app.get_users(int(data['chat_id'])).first_name)
 	                reaction = app.send_reaction(int(data['chat_id']), int(data['message_id']), str(data['emoji']))
 	                answer.put(self.status(200, {"reaction": reaction}))
 	            elif(method == "editProfile"):
